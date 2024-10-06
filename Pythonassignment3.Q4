@@ -1,0 +1,12 @@
+import numpy as np
+
+# Coefficients matrix
+A = np.array([[2, 3], [4, 1]])
+
+# Constants vector
+b = np.array([5, 6])
+
+# Solve the system of linear equations
+solution = np.linalg.solve(A, b)
+
+solution
