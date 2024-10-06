@@ -1,0 +1,41 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters for the sine wave
+sampling_rate = 1000  # Samples per second
+T = 1.0 / sampling_rate  # Sampling interval
+duration = 2.0  # Duration in seconds
+frequency = 5  # Frequency of the sine wave in Hz
+time = np.arange(0, duration, T)
+
+# Generate the sine wave signal
+amplitude = 1.0
+sine_wave = amplitude * np.sin(2 * np.pi * frequency * time)
+
+# Perform FFT on the sine wave
+fft_result = np.fft.fft(sine_wave)
+fft_magnitude = np.abs(fft_result) / len(sine_wave)  # Normalize the amplitude
+frequencies = np.fft.fftfreq(len(sine_wave), T)
+
+# Only take the positive frequencies (as FFT is symmetric)
+positive_freqs = frequencies[:len(frequencies)//2]
+positive_magnitude = fft_magnitude[:len(frequencies)//2]
+
+# Plot the original sine wave signal
+plt.figure(figsize=(12, 6))
+
+plt.subplot(2, 1, 1)
+plt.plot(time, sine_wave)
+plt.title("Original Sine Wave Signal")
+plt.xlabel("Time [s]")
+plt.ylabel("Amplitude")
+
+# Plot the frequency spectrum (Magnitude of FFT)
+plt.subplot(2, 1, 2)
+plt.plot(positive_freqs, positive_magnitude)
+plt.title("Frequency Spectrum (FFT)")
+plt.xlabel("Frequency [Hz]")
+plt.ylabel("Magnitude")
+
+plt.tight_layout()
+plt.show()
