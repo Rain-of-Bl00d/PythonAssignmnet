@@ -1,0 +1,11 @@
+from scipy.optimize import minimize
+
+# Define the function f(x) = (x-3)^2 + 2
+def f(x):
+    return (x - 3)**2 + 2
+
+# Use scipy's minimize function to find the minimum of f(x)
+initial_guess = 0  # Starting point for the optimization
+result = minimize(f, initial_guess)
+
+result.fun, result.x  # Return the minimum value and the point at which it occurs
